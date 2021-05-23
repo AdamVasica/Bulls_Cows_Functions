@@ -3,6 +3,7 @@ import random
 secret_num = []
 attempts = 0
 
+
 def main():
     separator = 80 * '-'
     print('Hi there!')
@@ -10,17 +11,18 @@ def main():
     print("I've generated a random 4 digit number for you. Let's play a bulls and cows game.")
     print(separator)
 
-#Computer generating number
+
+# Computer generating number
 def generate_number():
-    for i in range(0,4):
-        num = random.randint(1,9)
+    for i in range(0, 4):
+        num = random.randint(1, 9)
         secret_num.append(num)
     if len(secret_num) != len(set(secret_num)):
         secret_num.clear()
         return generate_number()
 
 
-#Playing the game + conditions
+# Playing the game + conditions
 def game():
     global attempts
     my_number = 0
@@ -29,10 +31,10 @@ def game():
         attempts += 1
         cows = 0
         bulls = 0
+
         my_number = input('Enter a four digit number:')
 
-
-
+        # Checking if the input is correct
         if len(my_number) != 4:
             print('The number must contain 4 digits')
             continue
@@ -49,7 +51,6 @@ def game():
             print('Number can not contain duplicates')
             continue
 
-
         guess = []
 
         for i in range(4):
@@ -63,17 +64,35 @@ def game():
             if guess[j] in secret_num and guess[j] != secret_num[j]:
                 cows += 1
 
-        print(cows, "cows")
-        print(bulls, 'bulls')
-
         if bulls == 4:
             print('You won the game in', attempts, 'attempts, congratulations!')
-        else:
-            game()
+            print(80 * '-')
+            break
 
+        print(80 * '-')
+        print('Your results:')
+        print(cows, "cows")
+        print(bulls, 'bulls')
+        print(80 * '-')
+
+    else:
+        game()
+
+
+def your_results():
+    global attempts
+
+    if attempts <= 5:
+        print('You did great!')
+
+    if 6 <= attempts <= 10:
+        print('Good results!')
+
+    if attempts >= 11:
+        print('Try again, you could do better!')
 
 
 main()
 generate_number()
 game()
-print(secret_num)
+your_results()

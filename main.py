@@ -29,7 +29,6 @@ def game():
         attempts += 1
         cows = 0
         bulls = 0
-        print(secret_num)
         my_number = input('Enter a four digit number:')
 
 
